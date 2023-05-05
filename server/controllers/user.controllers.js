@@ -17,7 +17,8 @@ module.exports.createUser = async (req, res) => {
     await user.save();
 
     res.status(201).json({ message: 'Usuario creado!' });
-  } catch (error) {
+  } 
+  catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Error al crear usuario' });
   }
@@ -28,25 +29,27 @@ module.exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email: email });
+
     if (!user) {
       return res.status(401).json({ message: 'Error de autenticación 1' });
-    } else {
-        const isValidPassword = await bcrypt.compare(password, user.password);
-        if (isValidPassword) {
-            const token = jwt.sign({ 
-                email: user.email 
-            }, secretKey);
+    } 
+    else {
+      const isValidPassword = await bcrypt.compare(password, user.password);
+      if (isValidPassword) {
+        const token = jwt.sign({ email: user.email }, secretKey);
             
-                res.cookie('token', token, secretKey, { httpOnly: true });
-                res.status(200).json({ message: 'Usuario logueado con éxito' });
+          res.cookie('token', token, secretKey, { httpOnly: true });
+          res.status(200).json({ message: 'Usuario logueado con éxito' });
 
-        } else {
-            return res.status(403).json({ message: 'Credenciales inválidas' });
+        } 
+      else {
+        return res.status(403).json({ message: 'Credenciales inválidas' });
         }
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.log(error);
-    return res.status(403).json({ message: 'credenciales inválidas' });
+    return res.status(403).json({ message: 'Credenciales inválidas' });
   }
 };
 

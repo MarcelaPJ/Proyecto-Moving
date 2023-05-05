@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-//
+
 mongoose.connect('mongodb://localhost/academias', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-    .then(() => console.log("Established a connection to the database"))
-    .catch(err => console.log("Something went wrong when connecting to the database", err));
+    .then(() => console.log("Conectado exitosamente a la base de datos"))
+    .catch(err => console.log("Problemas al conectarse con la base de datos", err));

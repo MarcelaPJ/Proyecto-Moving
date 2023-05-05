@@ -17,6 +17,7 @@ app.use(cors({
         'Content-type',
     ]
 }));
+
 app.use(cookieParser());
 
 app.use(express.json());
@@ -26,5 +27,6 @@ require('./config/mongoose.config');
 console.log(process.env.SECRET_KEY);
 
 require('./routes/academias.routes')(app);
+require('./routes/user.routes')(app); //nuevo
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));

@@ -31,8 +31,7 @@ module.exports.findOneAcademia = (req, res) => {
 
 // Actualizar un estudiante con sus academias
 module.exports.updateAcademia = (req, res) => {
-    Academia.findOneAndUpdate({_id: req.params.id}, req.body,
-        {new:true})
+    Academia.findOneAndUpdate({_id: req.params.id}, req.body,{new:true})
         .then(updatedAcademia => res.json({academia: updatedAcademia}))
         .catch(err => res.json({message: "something went wrong!", error: err}));
 }
